@@ -1,8 +1,9 @@
 <?php
 namespace AssetLoader;
 
-use Zend\Module\Manager,
-    Zend\EventManager\StaticEventManager;
+use Zend\ModuleManager\ModuleManager,
+    Zend\EventManager\StaticEventManager,
+    \finfo;
 
 /**
  * Module for loading assets in development.
@@ -19,10 +20,10 @@ class Module
     /**
      * Initialize the module.
      *
-     * @param  Manager $moduleManager
+     * @param  ModuleManager $moduleManager
      * @return void
      */
-    public function init(Manager $moduleManager)
+    public function init(ModuleManager $moduleManager)
     {
         $moduleManager->events()->attach('loadModule', array($this, 'addAssetPath'));
 
