@@ -2,7 +2,6 @@
 namespace AssetLoader;
 
 use Zend\ModuleManager\ModuleManager,
-    Zend\EventManager\StaticEventManager,
     \finfo;
 
 /**
@@ -26,9 +25,11 @@ class Module
     public function init(ModuleManager $moduleManager)
     {
         $moduleManager->events()->attach('loadModule', array($this, 'addAssetPath'));
+    }
 
-        $events = StaticEventManager::getInstance();
-        $events->attach('Zend\Mvc\Application', 'route', array($this, 'checkRequestUriForAsset'), PHP_INT_MAX);
+    public function onBootstrap($e) 
+    {
+        $this->checkRequestUriForAsset($e);
     }
 
     /**
