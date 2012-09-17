@@ -24,7 +24,10 @@ class Module
      */
     public function init(ModuleManager $moduleManager)
     {
-        $moduleManager->events()->attach('loadModule', array($this, 'addAssetPath'));
+        $moduleManager->getEventManager()->attach(
+            'loadModule',
+            array($this, 'addAssetPath')
+        );
     }
 
     public function onBootstrap($e) 
