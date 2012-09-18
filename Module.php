@@ -64,7 +64,7 @@ class Module
     {
         $request = $event->getRequest();
 
-        if (!method_exists($request, 'uri')) {
+        if (!method_exists($request, 'getUri')) {
             return;
         }
 
@@ -74,7 +74,7 @@ class Module
             $baseUrlLength = 0;
         }
 
-        $path = substr($request->uri()->getPath(), $baseUrlLength);
+        $path = substr($request->getUri()->getPath(), $baseUrlLength);
 
         foreach ($this->assetPaths as $assetPath) {
             if (file_exists($assetPath . $path)) {
